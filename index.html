@@ -779,8 +779,8 @@
         async function loadData() {
             try {
                 const [dashResp, cfgResp] = await Promise.all([
-                    fetch('https://cdn.jsdelivr.net/gh/FIFICHECK/oos-monitor@main/dashboard_data.json?' + Date.now()),
-                    fetch('https://cdn.jsdelivr.net/gh/FIFICHECK/oos-monitor@main/config.json?' + Date.now())
+                    fetch('https://raw.githubusercontent.com/FIFICHECK/oos-monitor/main/dashboard_data.json?' + Date.now()),
+                    fetch('https://raw.githubusercontent.com/FIFICHECK/oos-monitor/main/config.json?' + Date.now())
                 ]);
                 const dashData = await dashResp.json();
                 const config = await cfgResp.json();
@@ -1204,8 +1204,8 @@
             modal.classList.add('show');
             
             Promise.all([
-                fetch('https://cdn.jsdelivr.net/gh/FIFICHECK/oos-monitor@main/dashboard_data.json?' + Date.now()).then(function(r) { return r.json(); }),
-                fetch('https://cdn.jsdelivr.net/gh/FIFICHECK/oos-monitor@main/config.json?' + Date.now()).then(function(r) { return r.json(); })
+                fetch('https://raw.githubusercontent.com/FIFICHECK/oos-monitor/main/dashboard_data.json?' + Date.now()).then(function(r) { return r.json(); }),
+                fetch('https://raw.githubusercontent.com/FIFICHECK/oos-monitor/main/config.json?' + Date.now()).then(function(r) { return r.json(); })
             ]).then(function(results) {
                 const data = results[0];
                 const config = results[1];
