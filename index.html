@@ -589,18 +589,19 @@
         <div class="table-scroll"><table>
             <thead>
                 <tr>
-                    <th style="width:20%;">SKU</th>
-                    <th style="width:28%;">Product Name</th>
-                    <th style="width:8%;">庫存</th>
-                    <th style="width:8%;">Status</th>
-                    <th style="width:10%;">Price</th>
+                    <th style="width:18%;">SKU</th>
+                    <th style="width:26%;">Product Name</th>
+                    <th style="width:7%;">庫存</th>
+                    <th style="width:7%;">Status</th>
+                    <th style="width:8%;">Sold</th>
+                    <th style="width:9%;">Price</th>
                     <th style="width:10%;">Starts</th>
-                    <th style="width:8%;">End</th>
+                    <th style="width:7%;">End</th>
                     <th style="width:8%;">Link</th>
                 </tr>
             </thead>
             <tbody id="allSkuBody">
-                <tr><td colspan="8" style="text-align:center;color:#666;">No data yet</td></tr>
+                <tr><td colspan="9" style="text-align:center;color:#666;">No data yet</td></tr>
             </tbody>
         </table>
         </div>
@@ -610,18 +611,19 @@
         <div class="table-scroll"><table>
             <thead>
                 <tr>
-                    <th style="width:20%;">SKU</th>
-                    <th style="width:28%;">Product Name</th>
-                    <th style="width:8%;">庫存</th>
-                    <th style="width:8%;">Status</th>
-                    <th style="width:10%;">Price</th>
+                    <th style="width:18%;">SKU</th>
+                    <th style="width:26%;">Product Name</th>
+                    <th style="width:7%;">庫存</th>
+                    <th style="width:7%;">Status</th>
+                    <th style="width:8%;">Sold</th>
+                    <th style="width:9%;">Price</th>
                     <th style="width:10%;">Starts</th>
-                    <th style="width:8%;">End</th>
+                    <th style="width:7%;">End</th>
                     <th style="width:8%;">Link</th>
                 </tr>
             </thead>
             <tbody id="pendingSkuBody">
-                <tr><td colspan="8" style="text-align:center;color:#666;">No pending SKUs</td></tr>
+                <tr><td colspan="9" style="text-align:center;color:#666;">No pending SKUs</td></tr>
             </tbody>
         </table>
         </div>
@@ -631,18 +633,19 @@
         <div class="table-scroll"><table>
             <thead>
                 <tr>
-                    <th style="width:20%;">SKU</th>
-                    <th style="width:28%;">Product Name</th>
-                    <th style="width:8%;">Last 庫存</th>
-                    <th style="width:8%;">Status</th>
-                    <th style="width:10%;">Last Price</th>
+                    <th style="width:18%;">SKU</th>
+                    <th style="width:26%;">Product Name</th>
+                    <th style="width:7%;">Last 庫存</th>
+                    <th style="width:7%;">Status</th>
+                    <th style="width:8%;">Sold</th>
+                    <th style="width:9%;">Last Price</th>
                     <th style="width:10%;">Starts</th>
-                    <th style="width:8%;">End</th>
+                    <th style="width:7%;">End</th>
                     <th style="width:8%;">Link</th>
                 </tr>
             </thead>
             <tbody id="expirySkuBody">
-                <tr><td colspan="8" style="text-align:center;color:#666;">No expired SKUs yet</td></tr>
+                <tr><td colspan="9" style="text-align:center;color:#666;">No expired SKUs yet</td></tr>
             </tbody>
         </table>
         </div>
@@ -1090,11 +1093,14 @@
                         
                         var stockDisplay = s.stock_level !== null && s.stock_level !== undefined 
                             ? s.stock_level + ' 件' : '--';
+                        var soldVal = computeSold(sku, data.history);
+                        var soldDisplay = soldVal !== null ? '<span style="color:#ffd700;font-weight:bold;">' + soldVal + '</span>' : '<span style="color:#555;">--</span>';
                         
                         allRows.push('<tr><td class="sku-cell"><code onclick="showSkuHistory(\'' + sku + '\')" title="Click to view history">' + sku + '</code></td>'
                             + '<td class="name-cell">' + (s.product_name || 'N/A') + '</td>'
                             + '<td class="tag-cell">' + stockDisplay + '</td>'
                             + '<td class="tag-cell">' + tag + '</td>'
+                            + '<td class="tag-cell" style="text-align:center;">' + soldDisplay + '</td>'
                             + '<td class="price-cell">' + (s.price ? '$' + s.price : '--') + '</td>'
                             + '<td class="period-cell" style="color:#ffd700;font-size:0.8rem;">' + startDisplay + '</td>'
                             + '<td class="period-cell" style="color:#ffd700;font-size:0.8rem;">' + endDisplay + '</td>'
@@ -1104,6 +1110,7 @@
                         allRows.push('<tr><td class="sku-cell"><code onclick="showSkuHistory(\'' + sku + '\')" title="Click to view history">' + sku + '</code></td>'
                             + '<td class="name-cell">--</td><td class="tag-cell">--</td>'
                             + '<td class="tag-cell"><span class="tag tag-error">Pending</span></td>'
+                            + '<td class="tag-cell" style="text-align:center;color:#555;">--</td>'
                             + '<td class="price-cell">--</td>'
                             + '<td class="period-cell" style="color:#ffd700;font-size:0.8rem;">' + startDisplay + '</td>'
                             + '<td class="period-cell" style="color:#ffd700;font-size:0.8rem;">' + endDisplay + '</td>'
@@ -1113,9 +1120,9 @@
                 
                 allBody.innerHTML = allRows.length > 0 
                     ? allRows.join('')
-                    : '<tr><td colspan="8" style="text-align:center;color:#888;">All SKUs completed — see Monitored SKUs History</td></tr>';
+                    : '<tr><td colspan="9" style="text-align:center;color:#888;">All SKUs completed — see Monitored SKUs History</td></tr>';
             } else {
-                allBody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#e74c3c;">⚠️ No SKUs configured</td></tr>';
+                allBody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#e74c3c;">⚠️ No SKUs configured</td></tr>';
             }
             
             // All Pending Monitored SKUs Table — not yet started
@@ -1147,13 +1154,14 @@
                         + '<td class="name-cell" style="color:#888;">' + name + '</td>'
                         + '<td class="tag-cell" style="color:#888;">' + stock + '</td>'
                         + '<td class="tag-cell"><span class="tag" style="background:#888;color:#fff;">⏳ Pending</span></td>'
+                        + '<td class="tag-cell" style="text-align:center;color:#555;">--</td>'
                         + '<td style="color:#888;font-size:0.8rem;">' + price + '</td>'
                         + '<td style="color:#ffd700;font-size:0.8rem;">' + p.start + '</td>'
                         + '<td style="color:#ffd700;font-size:0.8rem;">' + p.end + '</td>'
                         + '<td class="link-cell"><a href="https://www.hktvmall.com/hktv/p/' + p.sku + '" target="_blank" style="color:#888;">View</a></td></tr>';
                 }).join('');
             } else {
-                pendingBody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#666;">No pending SKUs</td></tr>';
+                pendingBody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#666;">No pending SKUs</td></tr>';
             }
             
             // ⏰ Expiry SKUs — expired/completed SKUs
@@ -1175,23 +1183,39 @@
                     
                     var lastStock = s.stock_level !== null && s.stock_level !== undefined ? s.stock_level + ' 件' : '--';
                     var lastPrice = s.price ? '$' + s.price : '--';
+                    var soldVal = computeSold(s.sku, data.history);
+                    var soldDisplay = soldVal !== null ? '<span style="color:#ffd700;font-weight:bold;">' + soldVal + '</span>' : '<span style="color:#555;">--</span>';
                     
                     var tag = '<span class="tag tag-error">Expired</span>';
                     return '<tr><td class="sku-cell"><code onclick="showSkuHistory(\'' + s.sku + '\')" title="Click to view history" style="color:#888;">' + s.sku + '</code></td>'
                         + '<td class="name-cell" style="color:#888;">' + (s.product_name || 'N/A') + '</td>'
                         + '<td style="color:#888;font-size:0.8rem;">' + lastStock + '</td>'
                         + '<td>' + tag + '</td>'
+                        + '<td class="tag-cell" style="text-align:center;">' + soldDisplay + '</td>'
                         + '<td style="color:#888;font-size:0.8rem;">' + lastPrice + '</td>'
                         + '<td style="color:#666;font-size:0.8rem;">' + startDisplay + '</td>'
                         + '<td style="color:#666;font-size:0.8rem;">' + endDisplay + '</td>'
                         + '<td class="link-cell"><a href="https://www.hktvmall.com/hktv/p/' + s.sku + '" target="_blank" style="color:#666;">View</a></td></tr>';
                 }).join('');
             } else {
-                expiryBody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#666;">No expired SKUs yet</td></tr>';
+                expiryBody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#666;">No expired SKUs yet</td></tr>';
             }
             
             
             // View-Only: Settings panel elements removed
+        }
+        
+        // ── Compute Sold: sum only decreases (ignore restocks) ──
+        function computeSold(sku, history) {
+            if (!history || history.length < 2) return null;
+            var entries = history.filter(function(h) { return h.sku === sku && h.stock_level != null; });
+            if (entries.length < 2) return null;
+            var sold = 0;
+            for (var i = 1; i < entries.length; i++) {
+                var diff = entries[i-1].stock_level - entries[i].stock_level;
+                if (diff > 0) sold += diff;
+            }
+            return sold;
         }
         
         // Modal functions
@@ -1227,8 +1251,29 @@
                 if (filtered.length === 0) {
                     body.innerHTML = '<div class="modal-no-history">📭 No status changes recorded yet</div>';
                 } else {
+                    // ── Stock Diff Summary (cumulative decreases only) ──
+                    var firstStock = filtered[0].stock_level;
+                    var lastStock = filtered[filtered.length - 1].stock_level;
+                    var soldTotal = 0;
+                    for (var hi = 1; hi < filtered.length; hi++) {
+                        var d = filtered[hi-1].stock_level - filtered[hi].stock_level;
+                        if (d > 0) soldTotal += d;
+                    }
+                    var diffHtml = '';
+                    if (firstStock != null && lastStock != null && filtered.length >= 2) {
+                        diffHtml = '<div style="background:#0f3460;padding:12px;border-radius:8px;margin-bottom:12px;text-align:center;">'
+                            + '<div style="display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:8px;">'
+                            + '<div><span style="color:#888;font-size:0.75rem;">Start</span><br><span style="font-size:1.4rem;font-weight:bold;color:#2ecc71;">' + firstStock + '</span></div>'
+                            + '<div style="color:#888;font-size:1.2rem;font-weight:bold;">→</div>'
+                            + '<div><span style="color:#888;font-size:0.75rem;">End</span><br><span style="font-size:1.4rem;font-weight:bold;color:#e94560;">' + lastStock + '</span></div>'
+                            + '<div style="color:#888;font-size:0.8rem;padding:0 8px;">📉</div>'
+                            + '<div><span style="color:#888;font-size:0.75rem;">Total Sold</span><br><span style="font-size:1.4rem;font-weight:bold;color:#ffd700;">' + soldTotal + '</span></div>'
+                            + '</div>'
+                            + '<div style="color:#aaa;font-size:0.8rem;margin-top:4px;">累計減少 = ' + soldTotal + ' 件售出' + (soldTotal > 0 ? '（補貨已忽略）' : '）') + '</div>'
+                            + '</div>';
+                    }
                     const recent = filtered.slice().reverse();
-                    let html = '<table><thead><tr><th style="width:25%;">Time</th><th style="width:20%;">Status</th><th style="width:55%;">Detail</th></tr></thead><tbody>';
+                    let html = diffHtml + '<table><thead><tr><th style="width:25%;">Time</th><th style="width:20%;">Status</th><th style="width:55%;">Detail</th></tr></thead><tbody>';
                     html += recent.map(function(h) {
                         var tag = '';
                         if (h.status === 'oos') tag = '<span class="tag tag-oos">OOS</span>';
