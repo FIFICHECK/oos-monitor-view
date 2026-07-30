@@ -1006,6 +1006,8 @@
                     var pEnd = (config.sku_periods && config.sku_periods[s.sku]) || config.monitor_end || '--';
                     var stD = pStart ? new Date(pStart).toLocaleString('zh-HK', {year:'numeric', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit', hour12: false}) : '--';
                     var enD = pEnd !== '--' ? new Date(pEnd).toLocaleString('zh-HK', {year:'numeric', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit', hour12: false}) : '--';
+                    var lowSv = computeSold(s.sku, data.history);
+                    var lowSd = lowSv !== null ? '<span style="color:#ffd700;font-weight:bold;">' + lowSv + '</span>' : '<span style="color:#555;">--</span>';
                     return '<tr><td style="font-size:0.75rem;">' + (config.sku_rm && config.sku_rm[s.sku] ? config.sku_rm[s.sku] : '--') + '</td><td class="sku-cell"><code onclick="showSkuHistory(\'' + s.sku + '\')" title="Click to view history">' + s.sku + '</code></td>'
                     + '<td class="name-cell">' + (s.product_name || 'N/A') + '</td>'
                     + '<td class="tag-cell">' + (s.stock_level !== null && s.stock_level !== undefined ? s.stock_level + ' 件' : '--') + '</td>'
