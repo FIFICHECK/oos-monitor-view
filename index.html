@@ -1006,7 +1006,7 @@
                     var pEnd = (config.sku_periods && config.sku_periods[s.sku]) || config.monitor_end || '--';
                     var stD = pStart ? new Date(pStart).toLocaleString('zh-HK', {year:'numeric', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit', hour12: false}) : '--';
                     var enD = pEnd !== '--' ? new Date(pEnd).toLocaleString('zh-HK', {year:'numeric', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit', hour12: false}) : '--';
-                    return '<tr><td style="color:#888;font-size:0.75rem;">' + (config.sku_rm && config.sku_rm[s.sku] ? config.sku_rm[s.sku] : '--') + '</td><td class="sku-cell"><code onclick="showSkuHistory(\'' + s.sku + '\')" title="Click to view history">' + s.sku + '</code></td>'
+                    return '<tr><td style="font-size:0.75rem;">' + (config.sku_rm && config.sku_rm[s.sku] ? config.sku_rm[s.sku] : '--') + '</td><td class="sku-cell"><code onclick="showSkuHistory(\'' + s.sku + '\')" title="Click to view history">' + s.sku + '</code></td>'
                     + '<td class="name-cell">' + (s.product_name || 'N/A') + '</td>'
                     + '<td class="tag-cell"><span class="tag tag-low">' + s.stock_level + ' 件</span></td>'
                     + '<td class="tag-cell"><span class="tag tag-low">Low</span></td>'
@@ -1163,7 +1163,7 @@
                     var name = (p.info && p.info.product_name) ? p.info.product_name : '--';
                     var stock = (p.info && p.info.stock_level !== null && p.info.stock_level !== undefined) ? p.info.stock_level + ' 件' : '--';
                     var price = (p.info && p.info.price) ? '$' + p.info.price : '--';
-                    return '<tr style="color:#888;"><td style="color:#888;font-size:0.75rem;">' + (config.sku_rm && config.sku_rm[p.sku] ? config.sku_rm[p.sku] : '--') + '</td>'
+                    return '<tr style="color:#888;"><td style="font-size:0.75rem;">' + (config.sku_rm && config.sku_rm[p.sku] ? config.sku_rm[p.sku] : '--') + '</td>'
                         + '<td class="sku-cell"><code style="color:#888;">' + p.sku + '</code></td>'
                         + '<td class="name-cell" style="color:#888;">' + name + '</td>'
                         + '<td class="tag-cell" style="color:#888;">' + stock + '</td>'
@@ -1277,11 +1277,11 @@
                     if (firstStock != null && lastStock != null && filtered.length >= 2) {
                         diffHtml = '<div style="background:#0f3460;padding:12px;border-radius:8px;margin-bottom:12px;text-align:center;">'
                             + '<div style="display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:8px;">'
-                            + '<div><span style="color:#888;font-size:0.75rem;">Start</span><br><span style="font-size:1.4rem;font-weight:bold;color:#2ecc71;">' + firstStock + '</span></div>'
+                            + '<div><span style="font-size:0.75rem;">Start</span><br><span style="font-size:1.4rem;font-weight:bold;color:#2ecc71;">' + firstStock + '</span></div>'
                             + '<div style="color:#888;font-size:1.2rem;font-weight:bold;">→</div>'
-                            + '<div><span style="color:#888;font-size:0.75rem;">End</span><br><span style="font-size:1.4rem;font-weight:bold;color:#e94560;">' + lastStock + '</span></div>'
+                            + '<div><span style="font-size:0.75rem;">End</span><br><span style="font-size:1.4rem;font-weight:bold;color:#e94560;">' + lastStock + '</span></div>'
                             + '<div style="color:#888;font-size:0.8rem;padding:0 8px;">📉</div>'
-                            + '<div><span style="color:#888;font-size:0.75rem;">Total Sold</span><br><span style="font-size:1.4rem;font-weight:bold;color:#ffd700;">' + soldTotal + '</span></div>'
+                            + '<div><span style="font-size:0.75rem;">Total Sold</span><br><span style="font-size:1.4rem;font-weight:bold;color:#ffd700;">' + soldTotal + '</span></div>'
                             + '</div>'
                             + '<div style="color:#aaa;font-size:0.8rem;margin-top:4px;">累計減少 = ' + soldTotal + ' 件售出' + (soldTotal > 0 ? '（補貨已忽略）' : '）') + '</div>'
                             + '</div>';
