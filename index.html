@@ -537,7 +537,7 @@
                     <th style="width:22%;">Product Name</th>
                     <th style="width:7%;">庫存</th>
                     <th style="width:7%;">Status</th>
-                    <th style="width:8%;">Sold</th>
+                    <th style="width:8%;text-align:center;padding-right:12px;">Sold</th>
                     <th style="width:9%;">Price</th>
                     <th style="width:10%;">Starts</th>
                     <th style="width:7%;">End</th>
@@ -558,7 +558,7 @@
                     <th style="width:22%;">Product Name</th>
                     <th style="width:7%;">庫存</th>
                     <th style="width:7%;">Status</th>
-                    <th style="width:8%;">Sold</th>
+                    <th style="width:8%;text-align:center;padding-right:12px;">Sold</th>
                     <th style="width:9%;">Price</th>
                     <th style="width:10%;">Starts</th>
                     <th style="width:7%;">End</th>
@@ -579,7 +579,7 @@
                     <th style="width:22%;">Product Name</th>
                     <th style="width:7%;">庫存</th>
                     <th style="width:7%;">Status</th>
-                    <th style="width:8%;">Sold</th>
+                    <th style="width:8%;text-align:center;padding-right:12px;">Sold</th>
                     <th style="width:9%;">Price</th>
                     <th style="width:10%;">Starts</th>
                     <th style="width:7%;">End</th>
@@ -1006,11 +1006,11 @@
                     var pEnd = (config.sku_periods && config.sku_periods[s.sku]) || config.monitor_end || '--';
                     var stD = pStart ? new Date(pStart).toLocaleString('zh-HK', {year:'numeric', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit', hour12: false}) : '--';
                     var enD = pEnd !== '--' ? new Date(pEnd).toLocaleString('zh-HK', {year:'numeric', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit', hour12: false}) : '--';
-                    return '<tr><td class="sku-cell"><code onclick="showSkuHistory(\'' + s.sku + '\')" title="Click to view history">' + s.sku + '</code></td>'
+                    return '<tr><td style="color:#888;font-size:0.75rem;">' + (config.sku_rm && config.sku_rm[s.sku] ? config.sku_rm[s.sku] : '--') + '</td><td class="sku-cell"><code onclick="showSkuHistory(\'' + s.sku + '\')" title="Click to view history">' + s.sku + '</code></td>'
                     + '<td class="name-cell">' + (s.product_name || 'N/A') + '</td>'
                     + '<td class="tag-cell"><span class="tag tag-low">' + s.stock_level + ' 件</span></td>'
                     + '<td class="tag-cell"><span class="tag tag-low">Low</span></td>'
-                    + '<td class="tag-cell" style="text-align:center;">--</td>'
+                    + '<td class="tag-cell" style="text-align:center;">' + lowSd + '</td>'
                     + '<td class="price-cell">' + (s.price ? '$' + s.price : '--') + '</td>'
                     + '<td class="period-cell" style="color:#ffd700;font-size:0.8rem;">' + stD + '</td>'
                     + '<td class="period-cell" style="color:#ffd700;font-size:0.8rem;">' + enD + '</td>'
